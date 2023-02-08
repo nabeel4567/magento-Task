@@ -1,0 +1,47 @@
+<?php
+    /**
+     * @var $block \Advance\Crudform\Block\Index
+     * @var \Magento\Framework\Escaper $escaper
+     */
+    $data = $block->getAllCollection();
+    ?>
+
+
+    <?php if (count($data) > 0): ?>
+        <table border="1">
+            <tr>
+                <th><?= __("ID") ?></th>
+                <th><?= __("Name") ?></th>
+                <th><?= __("Email") ?></th>
+                <th><?= __("Image") ?></th>
+                <th><?= __("Display") ?></th>
+                <th><?= __("Action") ?></th>
+
+            </tr>
+            <?php foreach ($data as $item): ?>
+                <tr>
+                    <td><?= $escaper->escapeHtml( $item->getId()  )?></td>
+                    <td><?= $escaper->escapeHtml( $item->getName() ) ?></td>
+                    <td><?= $escaper->escapeHtml( $item->getEmail() ) ?></td>
+                    <td><?= $escaper->escapeHtml( $item->getImage() ) ?></td>
+                    <td><img  src="<?php echo $block->getImagePath().$item->getImage() ?>" width="100px" height="100px"></td>
+                    <td><a style="margin-left: 9px" href="<?php echo $block->getEditAction() . 'id/' . $item->getId(); ?>"><?php echo __('Edit') ?></a></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php else: ?>
+        <h1 style="color: red"><?= __("Till Form data not submit :(") ?></h1>
+    <?php endif; ?>
+    <hr />
+<a href="<?php echo $block->getDeleteAction(); ?>"><?php echo __('Delete') ?></a>
+    <hr />
+    <form method="post" action="<?= $block->getPostUrl() ?>" enctype='multipart/form-data'>
+        <label for="name"><?= __("Name") ?></label>
+        <input type="text" name="name"/>
+        <label for="email"><?= __("Email") ?></label>
+        <input type="text" name="email"/>
+        <label for="image"><?= __("Image") ?></label>
+        <input type="file" name="image"/>
+        <input type="submit" value="<?= __("Submit") ?>" />
+    </form>
+<hr />

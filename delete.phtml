@@ -1,0 +1,20 @@
+<?php
+/**
+ * @var $block \Advance\Crudform\Block\Index
+ */
+?>
+
+<form method="get">
+    <label><?= __("Enter Row ID") ?>
+        <input type="text" name="id">
+    </label>
+    <?php
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $block->getDeleteRow($id);
+    }
+    ?>
+    <label><?= __("Submit") ?>
+        <input type="submit" name="submit" onclick="<?= $block->getdeleteUrl() ?>">
+    </label>
+</form>
